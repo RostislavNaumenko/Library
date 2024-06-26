@@ -8,7 +8,7 @@ public class User {
     private String email;
     private String password;
 
-    //TODO Добавить Роли (админ, читатель)
+    //TODO (Rostyslav) Добавить Роли (админ, читатель)
 
 
     public User(int userId, String name, String email, String password) {
