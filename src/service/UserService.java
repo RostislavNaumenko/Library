@@ -1,8 +1,12 @@
 package service;
 
 
+import model.Book;
 import model.User;
 import repository.UserRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserService {
 
@@ -55,5 +59,29 @@ public class UserService {
         boolean isValidName = name.matches("^[A-Z][a-zA-Z]*$");
         // Это регулярное выражение проверяет, что имя начинается с большой буквы и содержит только буквы
 
-
     }
+
+
+
+    // Ваш класс Book должен иметь методы getAuthor() и isBorrowed()
+
+    // Пример использования:
+    /*
+    public static void main(String[] args) {
+        Library library = new Library();
+        // Заполните список книг
+        // ...
+
+        String desiredAuthor = "J.K. Rowling";
+        List<Book> availableBooksByAuthor = library.getAllAvailableBooksByAuthor(desiredAuthor);
+        if (availableBooksByAuthor.isEmpty()) {
+            System.out.println("Нет доступных книг автора " + desiredAuthor);
+        } else {
+            System.out.println("Доступные книги автора " + desiredAuthor + ":");
+            for (Book book : availableBooksByAuthor) {
+                System.out.println(book.getTitle());
+            }
+        }
+    }
+}
+*/

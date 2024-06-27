@@ -1,8 +1,11 @@
 package repository;
 
+import model.Book;
+import model.BookStorage;
 import model.User;
 import util.MyList;
 
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class UserRepository {
@@ -24,5 +27,19 @@ public class UserRepository {
 
     }
 
+   // BookStorage bookStorage= new BookStorage();
+    // Добавьте книги в библиотеку
 
+    String desiredAuthor = "Петров В.В."; // Заменить на нужного автора
+    ArrayList<Book> booksByAuthor =BookStorage.getBooksByAuthor (desiredAuthor);
+    // здесь что-то не пошло с автором, нужно создать getBooksByAuthor, но вроде уже создано getBooksByAuthor
+
+        if (booksByAuthor.isEmpty()) { // добавляла .isTaken результат тот же= красный
+        System.out.println("Нет книг автора " + desiredAuthor);
+    } else {
+        System.out.println("Книги автора " + desiredAuthor + ":");
+        for (Book book : booksByAuthor) {
+            System.out.println(book.getTitle()); // Заменить на нужное поле (название книги)
+        }
+    }
 }

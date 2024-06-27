@@ -23,6 +23,8 @@ public class BookService {
         //TODO(Alla) Проверить если существует эта книга в нашем списке ( с таким именем и автором)
     // Поиск по названию и автору:
 
+
+
     public Book searchBooks(String title, String author) {
         for (Book book : bookRepository.getAllBooks()) {
             if (book.getTitle().equalsIgnoreCase(title) && book.getAuthor().equalsIgnoreCase(author)) {
@@ -30,6 +32,15 @@ public class BookService {
             }
         }
         return null; // Книга не найдена
+
+
+    }
+    @Override
+    public String toString() {
+        return "BookService{" +
+                "bookRepository=" + bookRepository +
+                ", bookMap=" + bookMap +
+                '}';
     }
 
 
@@ -51,6 +62,7 @@ public class BookService {
     public MyList<Book> getBooksByAuthor(String author){
         return bookRepository.getBooksByAuthor(author);
     }
+
 
     public MyList<Book> getAllBooks(){
         return bookRepository.getAllBooks();
