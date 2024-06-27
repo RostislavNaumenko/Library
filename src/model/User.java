@@ -7,15 +7,16 @@ public class User {
     private String name;
     private String email;
     private String password;
-
+    private Role role;
     //TODO (Rostyslav) Добавить Роли (админ, читатель)
 
 
-    public User(int userId, String name, String email, String password) {
+    public User(int userId, String name, String email, String password, Role role) {
         this.password = password;
         this.email = email;
         this.name = name;
         this.userId = userId;
+        this.role = role;
     }
 
 
@@ -36,6 +37,13 @@ public class User {
         return password;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     @Override
     public String toString() {
@@ -44,6 +52,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", role=" + role +
                 '}';
     }
 }

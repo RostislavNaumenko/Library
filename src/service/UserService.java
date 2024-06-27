@@ -2,6 +2,7 @@ package service;
 
 
 import model.User;
+import modelLayer.Role;
 import repository.UserRepository;
 
 public class UserService {
@@ -14,7 +15,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    private User registerUser(String name, String email,String password){
+    private User registerUser(String name, String email, String password, Role role) {
         //TODO (Alla) Добавить валидация email, password, name
         // name:
         // 1.должно начинаться с большой буквы
@@ -23,7 +24,7 @@ public class UserService {
         //TODO(Rostyslav)isEmailExist
 
 
-        User user = userRepository.addUser(name, email, password);
+        User user = userRepository.addUser(name, email, password, role);
 
         return user;
     }
