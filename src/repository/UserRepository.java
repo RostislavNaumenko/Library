@@ -32,7 +32,8 @@ public class UserRepository {
 
     String desiredAuthor = "Петров В.В."; // Заменить на нужного автора
     ArrayList<Book> booksByAuthor =BookStorage.getBooksByAuthor (desiredAuthor);
-    // здесь что-то не пошло с автором, нужно создать getBooksByAuthor, но вроде уже создано getBooksByAuthor
+
+    String isEmpty= null;
 
         if (booksByAuthor.isEmpty()) { // добавляла .isTaken результат тот же= красный
         System.out.println("Нет книг автора " + desiredAuthor);
