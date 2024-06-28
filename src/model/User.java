@@ -51,6 +51,15 @@ public class User {
         this.role = role;
     }
 
+    public void setRole(Role role, User activeUser) {
+        if (activeUser.getRole() == Role.ADMIN) {
+            this.role = role;
+        } else {
+            throw new SecurityException("В доступе отказано");
+        }
+    }
+
+
     @Override
     public String toString() {
         return "User{" +
