@@ -34,7 +34,7 @@ public class UserRepository {
     ArrayList<Book> booksByAuthor =BookStorage.getBooksByAuthor (desiredAuthor);
 
     String isEmpty= null;
-
+// TODO здесь лезет ошибка, помогите решить
         if (booksByAuthor.isEmpty()) { // добавляла .isTaken результат тот же= красный
         System.out.println("Нет книг автора " + desiredAuthor);
     } else {

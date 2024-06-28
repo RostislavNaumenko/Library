@@ -21,9 +21,11 @@ public class Menu {
 
 
     }
+
     public static void main(String[] args) {
         BookStorage bookStorage = new BookStorage();
 
         // Заполните список книг
         // ..
-         }
+    }
+}

@@ -11,9 +11,10 @@ public class EmailValidation {
             InternetAddress address = new InternetAddress(email);
             address.validate();
         } catch (AddressException) {
+
             result = false;
             System.out.println("Адрес не найден");
-        }
+        } // TODO здесь лезет ошибка, помогите решить
         return result;
     }
 }
