@@ -18,7 +18,6 @@ public class BookRepository {
 
     //Add book
     public Book addBook (String title, String author){
-        //TODO(Alla) Проверить если существует эта книга в нашем списке ( с таким именем и автором)
         Book book = new Book(currentId.getAndIncrement(), title, author);
         books.add(book);
         return book;
@@ -62,11 +61,22 @@ public class BookRepository {
         return authorBooks;
     }
 
+    public boolean getBooksByAuthorAndByTitle() {
+        //TODO (Alla- DONE) Написать метод поиска книги по автору и названию книги
+        for (Book book : books) {
+            String title = book.getTitle();
+            String author = book.getAuthor();
+
+            if (!title.equals(book.getTitle()) && !author.equals(book.getAuthor())) {
+        return false;
+        // Например, можно выводить информацию о них или выполнять другие действия
+    }
+
 
     public MyList<Book> getFreeBooks() {
         MyList<Book> freeBooks = new MagicList<>();
         for (Book book : books) {
-            if (!book.isTaken()) {
+            if (book.isTaken() == false) {
                 freeBooks.add(book);
             }
         }
