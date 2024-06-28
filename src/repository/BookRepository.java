@@ -62,7 +62,6 @@ public class BookRepository {
     }
 
     //TODO Написать метод поиска книги по автору и названию книги
-    //TODO (Alla) Написать метод вывода всех незанятых книг по автору
 
     public MyList<Book> getFreeBooks() {
         MyList<Book> freeBooks = new MagicList<>();
