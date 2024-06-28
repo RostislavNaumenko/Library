@@ -3,10 +3,9 @@ package view;
 import java.util.Scanner;
 
 public class UserMenu  {
-    private final Menu menu;
 
-    public UserMenu(Menu menu) {
-        this.menu = menu;
+    public UserMenu() {
+
     }
 
     private final Scanner scanner = new Scanner(System.in);

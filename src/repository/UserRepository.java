@@ -1,6 +1,7 @@
 package repository;
 
 import model.User;
+import util.MagicList;
 import util.MyList;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -12,8 +13,8 @@ public class UserRepository {
     private final AtomicInteger currentId = new AtomicInteger(1);
 
 
-    public UserRepository(MyList<User> users) {
-        this.users = users;
+    public UserRepository() {
+        this.users = new MagicList<>();
     }
 
     public User addUser(String name, String email,String password){
