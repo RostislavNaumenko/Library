@@ -15,7 +15,6 @@ public class BookService {
     //Add books
 
     public Book addBook(String title, String author){
-        //TODO(Alla) Проверить если существует эта книга в нашем списке ( с таким именем и автором)
         Book book = bookRepository.addBook(title, author);
 
         return book;
@@ -42,14 +41,12 @@ public class BookService {
     //Take book
 
     public boolean takeBook (int bookId){
-        //TODO(Alla) Проверить не взята уже эта книга
         return  bookRepository.takeBook(bookId);
     }
 
     //Remove book
 
     public Book removeBook(int bookId){
-        //TODO (Alla) Проверить на существование такого id book
         return bookRepository.removeBook(bookId);
     }
 
