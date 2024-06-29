@@ -4,6 +4,8 @@ import model.Book;
 import util.MagicList;
 import util.MyList;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class BookRepository {
@@ -61,11 +63,43 @@ public class BookRepository {
         return authorBooks;
     }
 
-    //TODO Написать метод поиска книги по автору и названию книги
-    //TODO (Alla) Написать метод вывода всех незанятых книг по автору
+    public MyList<Book> getFreeBooks() {
+        MyList<Book> freeBooks = new MagicList<>();
+        for (Book book : books) {
+            if (!book.isTaken()) {
+                freeBooks.add(book);
+            }
+        }
+        return freeBooks;
+    }
 
+
+
+    public Book getBookByAuthorAndTitle(String title, String author){
+
+        for (Book book : books){
+            if(book.getAuthor().equalsIgnoreCase(author) && book.getTitle().equalsIgnoreCase(title)){
+                return book;
+            }
+        }
+
+        return null;
+    }
+
+
+    public MyList<Book> getAllTakenBooks() {
+        MyList<Book> takenBooks = new MagicList<>();
+        for (Book book : books) {
+            if (book.isTaken()) {
+                takenBooks.add(book);
+            }
+        }
+        return takenBooks;
+    }
 
     //UPDATE
+
+    //Взятие книги по id
     public boolean takeBook (int id) {
         Book book = getBookById(id);
         if(book == null || book.isTaken()){
@@ -76,8 +110,41 @@ public class BookRepository {
         return true;
     }
 
-    //Delete
+    //Взятие книги по title и author
+    public boolean takeBook (String title, String author) {
 
+       Book book = getBookByAuthorAndTitle(title, author);
+
+       if(book == null || book.isTaken()){
+           return false;
+       }
+        book.setTaken(true);
+        return true;
+
+    }
+
+    //Возвращение книги по id
+    public boolean returnBook (int id) {
+        Book book = getBookById(id);
+        if(book == null || !book.isTaken()){
+            return false;
+        }
+
+        book.setTaken(false);
+        return true;
+    }
+
+    //Возвращение книги по title и id
+    public boolean returnBook (String title, String author) {
+        Book book = getBookByAuthorAndTitle(title, author);
+        if(book == null || book.isTaken()){
+            return false;
+        }
+        book.setTaken(false);
+        return true;
+    }
+
+    //Delete
     public Book removeBook(int bookId){
         Book book = getBookById(bookId);
         if(book == null) return null;
@@ -85,6 +152,36 @@ public class BookRepository {
         books.remove(book);
         return book;
     }
+
+    //Sort
+
+    //TODO Ask Sergey
+    public MyList<Book> sortBooksByAuthor(String author){
+
+        MyList<Book> authorBooks = new MagicList<>();
+
+        for (Book book : books){
+            if(book.getAuthor().equals(author)){
+                authorBooks.add(book);
+            }
+        }
+
+        MyList<Book> sortedAuthorBooks = (MyList<Book>) Comparator.comparing(Book :: getTitle);
+
+       // Arrays.sort(authorBooks,Comparator.comparing(Book :: getTitle) );
+
+        return sortedAuthorBooks;
+
+    }
+
+    public MyList<Book> sortAllBooksByTitle(){
+        //return Collections.sort(books, Comparator.comparing(Book::getTitle));
+        return null;
+    }
+
+
+
+
 
 
 }

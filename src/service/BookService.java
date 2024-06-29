@@ -23,6 +23,10 @@ public class BookService {
 
     // Get books
 
+    public MyList<Book> getAllBooks(){
+        return bookRepository.getAllBooks();
+    }
+
     public Book getBookById(int bookId){
         return bookRepository.getBookById(bookId);
     }
@@ -35,23 +39,59 @@ public class BookService {
         return bookRepository.getBooksByAuthor(author);
     }
 
-    public MyList<Book> getAllBooks(){
-        return bookRepository.getAllBooks();
+    public Book getBookByAuthorAndTitle(String title, String author){
+        return bookRepository.getBookByAuthorAndTitle(title, author);
     }
+
+    public MyList<Book> getAllTakenBooks(){
+        return bookRepository.getAllTakenBooks();
+    }
+
 
     //Take book
 
+    //Взятие книги по id
     public boolean takeBook (int bookId){
-        //TODO(Alla) Проверить не взята уже эта книга
         return  bookRepository.takeBook(bookId);
     }
+
+    //Взятие книги по title и author
+    public boolean takeBook (String title, String author){
+        return bookRepository.takeBook(title, author);
+    }
+
+    //Возвращение книг
+
+    //Возвращение книги по id
+    public boolean returnBook (int id){
+        return bookRepository.returnBook(id);
+    }
+
+    //Возвращение книги по title и id
+    public boolean returnBook (String title, String author){
+        return bookRepository.returnBook(title, author);
+    }
+
 
     //Remove book
 
     public Book removeBook(int bookId){
-        //TODO (Alla) Проверить на существование такого id book
+
         return bookRepository.removeBook(bookId);
     }
+
+    //Sort
+
+    //Сортировка книг по автору
+    public MyList<Book> sortBooksByAuthor(String author){
+        return bookRepository.sortBooksByAuthor(author);
+    }
+
+    public MyList<Book> sortAllBooksByTitle(){
+        return bookRepository.sortAllBooksByTitle();
+    }
+
+
 
 
 }

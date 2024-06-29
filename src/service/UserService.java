@@ -1,8 +1,12 @@
 package service;
 
 
+import model.Role;
 import model.User;
 import repository.UserRepository;
+import util.MyList;
+
+import java.util.regex.Pattern;
 
 public class UserService {
 
@@ -14,20 +18,21 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    private User registerUser(String name, String email, String password) {
+    //Добавление пользователя
+    public User registerUser(String name, String email, String password) {
         //TODO (Alla) Добавить валидация email, password, name
         // name:
         // 1.должно начинаться с большой буквы
         // 2.не должно иметь цифр и специальных знаков
 
-        //TODO(Rostyslav)isEmailExist
-        User user = registerUser(name, email, password);
+        if (userRepository.isEmailExists(email)) return null;
+        User user = userRepository.addUser(name, email, password);
         return user;
     }
 
     // аутентификации пользователя
     public boolean authenticate(String email, String password) {
-        User user = userRepository.findByEmail(email);
+        User user = userRepository.getUserByEmail(email);
         if (user != null && user.getPassword().equals(password)) {
             this.activeUser = user;
             return true;
@@ -40,7 +45,37 @@ public class UserService {
     }
 
     // для выхода пользователя
-    public void logout() {
-        this.activeUser = null;
+    public boolean logout() {
+        if (activeUser == null) return false;
+        activeUser = null;
+        return true;
     }
+    // Admin methods (get and set)
+
+    public User getUserByEmail(String email){
+        return userRepository.getUserByEmail(email);
+    }
+
+    public User getUserById (int id){
+        if(id > userRepository.getAllUsers().size()) return null;
+
+        return userRepository.getUserById(id);
+    }
+
+    public MyList<User> getAllUsers(){
+        return userRepository.getAllUsers();
+    }
+
+    public User setUserRole(int id, Role role){
+        if(id > userRepository.getAllUsers().size()) return null;
+
+        return userRepository.setUserRole(id, role);
+    }
+
+    //Валидация email
+    private static boolean validateEmail(String email) {
+        String regexPattern = "^(?=. {1,64}@) [A-Za-z0-9_-]+ (\\\\. [A-Za-z0-9_-]+)*@ [^-] [A-Za-z0-9-]+ (\\\\. [A-Za-z0-9-]+)* (\\\\. [A-Za-z] {2,})$";
+        return Pattern.compile(regexPattern).matcher(email).matches();
+    }
+
 }
