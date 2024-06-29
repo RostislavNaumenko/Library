@@ -1,6 +1,8 @@
 package view;
 
 import model.User;
+import repository.BookRepository;
+import repository.UserRepository;
 import service.BookService;
 import service.UserService;
 
@@ -17,13 +19,13 @@ public class Menu {
 
 
 
-    public Menu(BookService bookService, UserService userService, BookMenu bookMenu, UserMenu userMenu, AdminMenu adminMenu) {
+    public Menu() {
         this.scanner = new Scanner(System.in);
-        this.bookService = bookService;
-        this.userService = userService;
-        this.bookMenu = bookMenu;
-        this.userMenu = userMenu;
-        this.adminMenu = adminMenu;
+        this.bookService = new BookService(new BookRepository());
+        this.userService = new UserService(new UserRepository());
+        this.bookMenu = new BookMenu();
+        this.userMenu = new UserMenu();
+        this.adminMenu = new AdminMenu();
     }
 
     public Menu(BookService bookService, UserService userService, BookMenu bookMenu, UserMenu userMenu, AdminMenu adminMenu, Scanner scanner) {

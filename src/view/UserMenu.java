@@ -46,7 +46,7 @@ public class UserMenu  {
                 String password = scanner.nextLine();
 
                 //TODO Создать в UserService метод "public boolean login"
-                /*
+                 /*
                 boolean isLogged = userService.login(name, password)
                 if (registered) {
                     System.out.println("Вы успешно авторизовались в системе");
@@ -59,7 +59,7 @@ public class UserMenu  {
                 break;
 
             case 3:
-                //TODO userService.logout
+                //TODO UserService.logout
 
                 break;
 
