@@ -11,8 +11,8 @@ public class BookRepository {
     private final MyList<Book> books;
     private final AtomicInteger currentId = new AtomicInteger(1);
 
-    public BookRepository(MyList<Book> books) {
-        this.books = books;
+    public BookRepository() {
+        this.books = new MagicList<>();
     }
 
 
