@@ -15,7 +15,7 @@ public class BookService {
     //Add books
 
     public Book addBook(String title, String author){
-        //TODO(Alla) Проверить если существует эта книга в нашем списке ( с таким именем и автором)
+        //TODO(Rostyslav) Проверить если существует эта книга в нашем списке ( с таким именем и автором)
         Book book = bookRepository.addBook(title, author);
 
         return book;

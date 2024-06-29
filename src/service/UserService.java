@@ -20,7 +20,7 @@ public class UserService {
 
     //Добавление пользователя
     public User registerUser(String name, String email, String password) {
-        //TODO (Alla) Добавить валидация email, password, name
+        //TODO (Rostyslav) Добавить валидация email, password, name
         // name:
         // 1.должно начинаться с большой буквы
         // 2.не должно иметь цифр и специальных знаков
@@ -73,6 +73,7 @@ public class UserService {
     }
 
     //Валидация email
+    //TODO (Rostyslav)
     private static boolean validateEmail(String email) {
         String regexPattern = "^(?=. {1,64}@) [A-Za-z0-9_-]+ (\\\\. [A-Za-z0-9_-]+)*@ [^-] [A-Za-z0-9-]+ (\\\\. [A-Za-z0-9-]+)* (\\\\. [A-Za-z] {2,})$";
         return Pattern.compile(regexPattern).matcher(email).matches();
