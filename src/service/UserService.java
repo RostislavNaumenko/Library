@@ -14,8 +14,8 @@ public class UserService {
     private User activeUser;
 
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserService() {
+        this.userRepository = new UserRepository();
     }
 
     //Добавление пользователя
