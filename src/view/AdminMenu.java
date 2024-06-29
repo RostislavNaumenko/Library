@@ -3,12 +3,12 @@ package view;
 import java.util.Scanner;
 
 public class AdminMenu {
-    private final Menu menu;
+
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public AdminMenu(Menu menu) {
-        this.menu = menu;
+    public AdminMenu() {
+
     }
 
     public void showAdminMenu() {

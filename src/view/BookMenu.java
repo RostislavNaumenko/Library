@@ -3,12 +3,12 @@ package view;
 import java.util.Scanner;
 
 public class BookMenu  {
-    private final Menu menu;
+
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public BookMenu(Menu menu) {
-        this.menu = menu;
+    public BookMenu() {
+
     }
 
     public void showBookMenu() {

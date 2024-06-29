@@ -1,6 +1,8 @@
 package view;
 
 import model.User;
+import repository.BookRepository;
+import repository.UserRepository;
 import service.BookService;
 import service.UserService;
 
@@ -10,18 +12,18 @@ import java.util.Scanner;
 public class Menu {
     private final BookService bookService;
     private final UserService userService;
-    private final BookMenu bookMenu;
+    private final BookMenu bookMenu ;
     private final UserMenu userMenu;
     private final AdminMenu adminMenu;
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public Menu(BookService bookService, UserService userService, BookMenu bookMenu, UserMenu userMenu, AdminMenu adminMenu) {
-        this.bookService = bookService;
-        this.userService = userService;
-        this.bookMenu = bookMenu;
-        this.userMenu = userMenu;
-        this.adminMenu = adminMenu;
+    public Menu() {
+        this.bookService = new BookService(new BookRepository());
+        this.userService = new UserService(new UserRepository());
+        this.bookMenu = new BookMenu();
+        this.userMenu = new UserMenu();
+        this.adminMenu = new AdminMenu();
     }
 
 
