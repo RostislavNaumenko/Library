@@ -3,12 +3,10 @@ package view;
 import java.util.Scanner;
 
 public class AdminMenu {
-    private final Menu menu;
+    private final Scanner scanner;
 
-    private final Scanner scanner = new Scanner(System.in);
-
-    public AdminMenu(Menu menu) {
-        this.menu = menu;
+    public AdminMenu() {
+        this.scanner = new Scanner(System.in);
     }
 
     public void showAdminMenu() {
@@ -17,15 +15,14 @@ public class AdminMenu {
             System.out.println("1 -> Добавление книги");
             System.out.println("2 -> Удаление книги");
             System.out.println("0 -> Возврат в предыдущее меню");
-
             System.out.println("\nСделайте выбор пункта:");
 
-            int control = scanner.nextInt();
+            int control = this.scanner.nextInt();
             scanner.nextLine();
             if (control == 0)
                 break;
 
-            AdminMenuWithBooks(control);
+            this.AdminMenuWithBooks(control);
 
         }
 

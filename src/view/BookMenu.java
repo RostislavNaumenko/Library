@@ -3,12 +3,10 @@ package view;
 import java.util.Scanner;
 
 public class BookMenu  {
-    private final Menu menu;
+    private final Scanner scanner;
 
-    private final Scanner scanner = new Scanner(System.in);
-
-    public BookMenu(Menu menu) {
-        this.menu = menu;
+    public BookMenu() {
+        this.scanner = new Scanner(System.in);
     }
 
     public void showBookMenu() {
@@ -22,14 +20,14 @@ public class BookMenu  {
             System.out.println("6 -> Возврат книги в библиотеку");
             System.out.println("7 -> Список всех книг, находящихся сейчас у читателей");
             System.out.println("0 -> Возврат в предыдущее меню");
-
             System.out.println("\nСделайте выбор пункта:");
-            int actions = scanner.nextInt();
+
+            int actions = this.scanner.nextInt();
             scanner.nextLine();
             if (actions == 0)
                 break;
 
-            ActionMenuWithBooks(actions);
+            this.ActionMenuWithBooks(actions);
 
         }
 

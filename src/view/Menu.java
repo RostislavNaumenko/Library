@@ -13,15 +13,27 @@ public class Menu {
     private final BookMenu bookMenu;
     private final UserMenu userMenu;
     private final AdminMenu adminMenu;
+    private final Scanner scanner;
 
-    private final Scanner scanner = new Scanner(System.in);
+
 
     public Menu(BookService bookService, UserService userService, BookMenu bookMenu, UserMenu userMenu, AdminMenu adminMenu) {
+        this.scanner = new Scanner(System.in);
         this.bookService = bookService;
         this.userService = userService;
         this.bookMenu = bookMenu;
         this.userMenu = userMenu;
         this.adminMenu = adminMenu;
+    }
+
+    public Menu(BookService bookService, UserService userService, BookMenu bookMenu, UserMenu userMenu, AdminMenu adminMenu, Scanner scanner) {
+
+        this.bookService = bookService;
+        this.userService = userService;
+        this.bookMenu = bookMenu;
+        this.userMenu = userMenu;
+        this.adminMenu = adminMenu;
+        this.scanner = scanner;
     }
 
 
@@ -33,13 +45,13 @@ public class Menu {
     private void showMenu() {
         while (true) {
             System.out.println("Добро пожаловать в меню");
-            System.out.println("1 -> Список всех книг");
+            System.out.println("1 -> Меню книг");
             System.out.println("2 -> Меню пользователей");
             System.out.println("3 -> Меню администратора");
             System.out.println("0 -> Выход");
             System.out.println("\nСделайте выбор:");
 
-            int choice = scanner.nextInt();
+            int choice = this.scanner.nextInt();
             scanner.nextLine();
 
             if (choice == 0) {
@@ -48,7 +60,7 @@ public class Menu {
                 //todo  ( break; ?)
 
             }
-            showSubMenu(choice);
+            this.showSubMenu(choice);
         }
     }
 

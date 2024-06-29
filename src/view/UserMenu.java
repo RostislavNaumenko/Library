@@ -3,13 +3,11 @@ package view;
 import java.util.Scanner;
 
 public class UserMenu  {
-    private final Menu menu;
+    private final Scanner scanner;
 
-    public UserMenu(Menu menu) {
-        this.menu = menu;
+    public UserMenu() {
+        this.scanner = new Scanner(System.in);
     }
-
-    private final Scanner scanner = new Scanner(System.in);
 
     public void showUserMenu() {
         while (true) {
@@ -18,15 +16,14 @@ public class UserMenu  {
             System.out.println("2 -> Авторизация");
             System.out.println("3 -> Logout");
             System.out.println("0 -> Возврат в предыдущее меню");
-
             System.out.println("\nСделайте выбор пункта:");
 
-            int input = scanner.nextInt();
+            int input = this.scanner.nextInt();
             scanner.nextLine();
             if (input == 0)
                 break;
 
-            handleUserMenuChoice(input);
+            this.handleUserMenuChoice(input);
         }
     }
 
