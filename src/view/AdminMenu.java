@@ -1,5 +1,7 @@
 package view;
 
+import model.User;
+
 import java.util.Scanner;
 
 public class AdminMenu {
@@ -11,7 +13,7 @@ public class AdminMenu {
 
     }
 
-    public void showAdminMenu() {
+    public void showAdminMenu(User activeUser) {
         while (true) {
             System.out.println("Меню Администратора");
             System.out.println("1 -> Добавление книги");

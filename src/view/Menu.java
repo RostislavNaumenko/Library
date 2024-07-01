@@ -34,7 +34,6 @@ public class Menu {
             showInitialMenu();
         }
     }
-
     private void showInitialMenu() {
         System.out.println("Добро пожаловать в меню");
         System.out.println("1 -> Вход для администратора");
@@ -52,28 +51,71 @@ public class Menu {
         }
 
         if (choice == 1) {
-            loginAsAdmin();
+            showAdminMainMenu();
         } else if (choice == 2) {
-            userMenu.showUserMenu();
+            showUserMenu();
         } else {
             System.out.println("Некорректный выбор. Попробуйте снова.");
         }
     }
 
-    private void loginAsAdmin() {
-        System.out.println("Введите email:");
-        String email = scanner.nextLine();
+    private void showAdminMainMenu() {
+        User admin = new User(0, "Admin", "admin@example.com", "password");
+        admin.setRole(Role.ADMIN);
+        userService.setActiveUser(admin);
 
-        System.out.println("Введите пароль:");
-        String password = scanner.nextLine();
+        adminMenu.showAdminMenu(userService.getActiveUser());
+    }
 
-        boolean isAuthenticated = userService.authenticate(email, password);
-        if (isAuthenticated && userService.getActiveUser().getRole() == Role.ADMIN) {
-            adminMenu.showAdminMenu();
-        } else {
-            System.out.println("Ошибка при входе. Попробуйте снова.");
+    private void showUserMenu() {
+        User user = new User(0, "User", "user@example.com", "password");
+        userService.setActiveUser(user);
+
+        showMainMenu(false);
+    }
+
+    private void showMainMenu(boolean isAdmin) {
+        User activeUser = userService.getActiveUser();
+        while (true) {
+            System.out.println("Меню пользователя");
+            System.out.println("1 -> Моя информация");
+            System.out.println("2 -> Меню книг");
+            if (isAdmin) {
+                System.out.println("3 -> Меню администратора");
+            }
+            System.out.println("0 -> Выход");
+
+            System.out.println("\nСделайте выбор:");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            if (choice == 0) {
+                System.out.println("До свидания");
+                System.exit(0);
+            }
+
+            switch (choice) {
+                case 1:
+                    System.out.println(activeUser);
+                    waitRead();
+                    break;
+                case 2:
+                    bookMenu.showBookMenu();
+                    break;
+                case 3:
+                    if (isAdmin) {
+                        adminMenu.showAdminMenu(activeUser);
+                    } else {
+                        System.out.println("Сделайте корректный выбор\n");
+                    }
+                    break;
+                default:
+                    System.out.println("Сделайте корректный выбор\n");
+            }
         }
     }
+
 //    private void showMenu() {
 //        while (true) {
 //            System.out.println("Добро пожаловать в меню");

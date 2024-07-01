@@ -2,7 +2,7 @@ package view;
 
 import java.util.Scanner;
 
-public class UserMenu  {
+public class UserMenu {
 
     public UserMenu() {
 
@@ -34,8 +34,6 @@ public class UserMenu  {
             case 1:
                 //Регистрация нового пользователя");
                 //TODO Создать в UserService метод "register"
-
-
                 break;
 
             case 2:

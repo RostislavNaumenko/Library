@@ -78,4 +78,6 @@ public class UserService {
         return Pattern.compile(regexPattern).matcher(email).matches();
     }
 
+    public void setActiveUser(User user) {
+    }
 }
