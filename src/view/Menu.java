@@ -80,9 +80,9 @@ public class Menu {
             System.out.println("Меню пользователя");
             System.out.println("1 -> Моя информация");
             System.out.println("2 -> Меню книг");
-            if (isAdmin) {
+        //    if (isAdmin) {
                 System.out.println("3 -> Меню администратора");
-            }
+                //  }
             System.out.println("0 -> Выход");
 
             System.out.println("\nСделайте выбор:");

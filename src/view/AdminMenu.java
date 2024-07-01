@@ -18,6 +18,7 @@ public class AdminMenu {
             System.out.println("Меню Администратора");
             System.out.println("1 -> Добавление книги");
             System.out.println("2 -> Удаление книги");
+            System.out.println("3 -> Меню администратора");
             System.out.println("0 -> Возврат в предыдущее меню");
 
             System.out.println("\nСделайте выбор пункта:");
