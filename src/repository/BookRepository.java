@@ -4,8 +4,11 @@ import model.Book;
 import util.MagicList;
 import util.MyList;
 
+import java.sql.Array;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class BookRepository {
@@ -110,18 +113,6 @@ public class BookRepository {
         return true;
     }
 
-    //Взятие книги по title и author
-    public boolean takeBook (String title, String author) {
-
-       Book book = getBookByAuthorAndTitle(title, author);
-
-       if(book == null || book.isTaken()){
-           return false;
-       }
-        book.setTaken(true);
-        return true;
-
-    }
 
     //Возвращение книги по id
     public boolean returnBook (int id) {
@@ -134,15 +125,6 @@ public class BookRepository {
         return true;
     }
 
-    //Возвращение книги по title и id
-    public boolean returnBook (String title, String author) {
-        Book book = getBookByAuthorAndTitle(title, author);
-        if(book == null || book.isTaken()){
-            return false;
-        }
-        book.setTaken(false);
-        return true;
-    }
 
     //Delete
     public Book removeBook(int bookId){
@@ -168,20 +150,17 @@ public class BookRepository {
 
         MyList<Book> sortedAuthorBooks = (MyList<Book>) Comparator.comparing(Book :: getTitle);
 
-       // Arrays.sort(authorBooks,Comparator.comparing(Book :: getTitle) );
-
         return sortedAuthorBooks;
 
     }
 
     public MyList<Book> sortAllBooksByTitle(){
-        //return Collections.sort(books, Comparator.comparing(Book::getTitle));
-        return null;
+        MyList<Book> sortedBooks = new MagicList<>();
+        for(Book book : books){
+            sortedBooks.add(book);
+        }
+        return (MyList<Book>) Comparator.comparing(Book::getTitle);
     }
-
-
-
-
 
 
 }

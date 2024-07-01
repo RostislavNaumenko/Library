@@ -50,24 +50,31 @@ public class UserService {
         activeUser = null;
         return true;
     }
+
     // Admin methods (get and set)
 
     public User getUserByEmail(String email){
-        return userRepository.getUserByEmail(email);
+        if(activeUser.getRole().equals(Role.ADMIN)){
+            return userRepository.getUserByEmail(email);
+        }
+        return null;
+
     }
 
     public User getUserById (int id){
-        if(id > userRepository.getAllUsers().size()) return null;
-
+        if(activeUser.getRole().equals(Role.ADMIN) || id > userRepository.getAllUsers().size()) return null;
         return userRepository.getUserById(id);
     }
 
     public MyList<User> getAllUsers(){
-        return userRepository.getAllUsers();
+        if(activeUser.getRole().equals(Role.ADMIN)){
+            return userRepository.getAllUsers();
+        }
+       return null;
     }
 
     public User setUserRole(int id, Role role){
-        if(id > userRepository.getAllUsers().size()) return null;
+        if(id > userRepository.getAllUsers().size() || activeUser.getRole().equals(Role.ADMIN)) return null;
 
         return userRepository.setUserRole(id, role);
     }

@@ -62,7 +62,8 @@ public class BookService {
 
     //Взятие книги по title и author
     public boolean takeBook (String title, String author){
-        return bookRepository.takeBook(title, author);
+        Book book = getBookByAuthorAndTitle(title, author);
+        return bookRepository.takeBook(book.getBookId());
     }
 
     //Возвращение книг
@@ -74,7 +75,8 @@ public class BookService {
 
     //Возвращение книги по title и id
     public boolean returnBook (String title, String author){
-        return bookRepository.returnBook(title, author);
+        Book book = getBookByAuthorAndTitle(title, author);
+        return bookRepository.returnBook(book.getBookId());
     }
 
 
