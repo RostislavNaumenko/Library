@@ -21,7 +21,7 @@ public class Menu {
     public Menu() {
         this.bookService = new BookService();
         this.userService = new UserService();
-        this.bookMenu = new BookMenu();
+        this.bookMenu = new BookMenu(bookService, userService);
         this.userMenu = new UserMenu();
         this.adminMenu = new AdminMenu(bookService, userService);
     }
