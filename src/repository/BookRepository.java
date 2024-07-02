@@ -4,11 +4,10 @@ import model.Book;
 import util.MagicList;
 import util.MyList;
 
-import java.sql.Array;
-import java.util.Arrays;
-import java.util.Collections;
+
 import java.util.Comparator;
 import java.util.List;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class BookRepository {
@@ -127,7 +126,6 @@ public class BookRepository {
         return true;
     }
 
-
     //Возвращение книги по id
     public boolean returnBook (int id) {
         Book book = getBookById(id);
@@ -167,12 +165,12 @@ public class BookRepository {
     }
 
     public MyList<Book> sortAllBooksByTitle(){
+
         Book[] array = books.toArray();
 
         Arrays.sort(array, Comparator.comparing(Book::getTitle));
         MyList<Book> result = new MagicList<>(array);
         return result;
     }
-
 
 }

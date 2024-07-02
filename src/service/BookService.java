@@ -43,15 +43,10 @@ public class BookService {
         return bookRepository.getBookByAuthorAndTitle(title, author);
     }
 
-    public MyList<Book> getFreeBooks(){
-        return bookRepository.getFreeBooks();
-    }
 
     public MyList<Book> getAllTakenBooks(){
         return bookRepository.getAllTakenBooks();
     }
-
-
 
     //Take book
 
@@ -77,6 +72,7 @@ public class BookService {
     public boolean returnBook (String title, String author){
         Book book = getBookByTitleAndAuthor(title, author);
         return bookRepository.returnBook(book.getBookId());
+
     }
 
 

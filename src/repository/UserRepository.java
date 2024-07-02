@@ -76,7 +76,6 @@ public class UserRepository {
     public User setUserRole(int id, Role role){
        User user = getUserById(id);
        if(user == null) return null;
-
        user.setRole(role);
 
        return user;
