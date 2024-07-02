@@ -10,17 +10,18 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class UserRepository {
 
     private final MyList<User> users = new MagicList<>();
-    private final AtomicInteger currentId = new AtomicInteger(4);
-    private User activeUser;
+    private final AtomicInteger currentId = new AtomicInteger(6);
 
 
     public UserRepository() {
     }
 
     {
-        users.add(new User(1, "Rostyslav", "ros@gmail.com", "Hjcnbc@322"));
+        users.add(new User(1, "Rostyslav", "ros@gmail.com", "Hjcnb@322", Role.ADMIN));
         users.add(new User(2, "Stas", "stas@gmail.com", "Hjcnbc@32222"));
-        users.add(new User(3, "Vlad", "vlad@gmail.com", "Vlad@32222"));
+        users.add(new User(3, "Vlad", "vlad@gmail.com", "Vlad@1234"));
+        users.add(new User(4, "1", "1", "1", Role.ADMIN));
+        users.add(new User(5,"2","2","2",Role.USER));
 
     }
 

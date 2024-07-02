@@ -32,23 +32,26 @@ public class AdminMenu {
             System.out.println("\nСделайте выбор пункта:");
             int control = scanner.nextInt();
             scanner.nextLine();
+            if (control == 0)
+                break;
             switch (control){
-                case 0:
-                    break;
                 case 1:
                 case 2:
                     AdminMenuWithBooks(control);
+                    break;
                 case 3:
                     showBooks() ;
                     waitRead();
                     break;
                 case 4:
                     AdminMenuWithUsers();
+                    break;
                 case 5:
                     showUsers();
                     waitRead();
                     break;
                 default:
+                    System.out.println(control);
                     System.out.println("не корректный выбор\n");
 
             }
@@ -184,12 +187,12 @@ public class AdminMenu {
                 String roleInput1 = scanner.nextLine().toUpperCase();
                 Role newRole1;
                 try {
-                    newRole = Role.valueOf(roleInput1);
+                    newRole1 = Role.valueOf(roleInput1);
                 } catch (IllegalArgumentException e) {
                     System.out.println("Некорректная роль: " + roleInput1);
                     break;
                 }
-                user1.setRole(newRole);
+                user1.setRole(newRole1);
                 System.out.println("Роль пользователя успешно обновлена.");
                 break;
             default:
