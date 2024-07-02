@@ -59,7 +59,7 @@ public class UserService {
     }
 
     public User getUserById (int id){
-        if(activeUser.getRole().equals(Role.ADMIN) || id > userRepository.getAllUsers().size()) return null;
+        if(!activeUser.getRole().equals(Role.ADMIN) || id > userRepository.getAllUsers().size()) return null;
         return userRepository.getUserById(id);
     }
 
@@ -67,11 +67,11 @@ public class UserService {
         if(activeUser.getRole().equals(Role.ADMIN)){
             return userRepository.getAllUsers();
         }
-       return null;
+        return null;
     }
 
     public User setUserRole(int id, Role role){
-        if(id > userRepository.getAllUsers().size() || activeUser.getRole().equals(Role.ADMIN)) return null;
+        if(id > userRepository.getAllUsers().size() || !activeUser.getRole().equals(Role.ADMIN)) return null;
 
         return userRepository.setUserRole(id, role);
     }
@@ -165,5 +165,6 @@ public class UserService {
         return isFirstLetterUpperCase && noDigit && noSpecialSymbol && validCharacters && noLeadingOrTrailingSpaces && noConsecutiveSpaces;
 
     }
+
 
 }
