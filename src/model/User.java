@@ -14,6 +14,13 @@ public class User {
         this.userId = userId;
         this.role = Role.USER;
     }
+    public User(int userId, String name, String email, String password, Role role) {
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.userId = userId;
+        this.role = role;
+    }
 
     public int getUserId() {
         return userId;
@@ -62,12 +69,12 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", role=" + role +
-                '}';
+        return "{ \n id= " + userId +
+                ";\n name= '" + name + '\'' +
+                ";\n email= '" + email + '\'' +
+                ";\n password= '" + password + '\'' +
+                ";\n role= '" + role + '\'' +
+                "\n}";
+
     }
 }

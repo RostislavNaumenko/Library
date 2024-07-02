@@ -39,10 +39,12 @@ public class BookService {
         return bookRepository.getBooksByAuthor(author);
     }
 
+    public MyList<Book> getAllFreeBooks(){ return bookRepository.getFreeBooks();}
+
+
     public Book getBookByTitleAndAuthor(String title, String author){
         return bookRepository.getBookByAuthorAndTitle(title, author);
     }
-
 
     public MyList<Book> getAllTakenBooks(){
         return bookRepository.getAllTakenBooks();
@@ -52,25 +54,29 @@ public class BookService {
 
     //Взятие книги по id
     public boolean takeBook (int bookId){
+        if(bookRepository.getBookById(bookId) == null) return false;
         return  bookRepository.takeBook(bookId);
     }
 
     //Взятие книги по title и author
     public boolean takeBook (String title, String author){
         Book book = getBookByTitleAndAuthor(title, author);
+        if(book == null) return false;
         return bookRepository.takeBook(book.getBookId());
     }
 
     //Возвращение книг
 
     //Возвращение книги по id
-    public boolean returnBook (int id){
-        return bookRepository.returnBook(id);
+    public boolean returnBook (int bookId){
+        if(bookRepository.getBookById(bookId) == null) return false;
+        return bookRepository.returnBook(bookId);
     }
 
     //Возвращение книги по title и id
     public boolean returnBook (String title, String author){
         Book book = getBookByTitleAndAuthor(title, author);
+        if(book == null) return false;
         return bookRepository.returnBook(book.getBookId());
 
     }

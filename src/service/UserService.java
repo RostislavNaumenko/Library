@@ -6,8 +6,6 @@ import model.User;
 import repository.UserRepository;
 import util.MyList;
 
-import java.util.regex.Pattern;
-
 public class UserService {
 
     private final UserRepository userRepository;
@@ -20,10 +18,11 @@ public class UserService {
 
     //Добавление пользователя
     public User registerUser(String name, String email, String password) {
-        if ( !isNameValid(name) || !isEmailValid(email) || userRepository.isEmailExists(email) || isPasswordValid(password) ){
+        if ( !isNameValid(name) || !isEmailValid(email) || userRepository.isEmailExists(email) || !isPasswordValid(password) ){
             return null;
         }
         User user = userRepository.addUser(name, email, password);
+        activeUser = user;
         return user;
     }
 
@@ -42,10 +41,9 @@ public class UserService {
     }
 
     // для выхода пользователя
-    public boolean logout() {
-        if (activeUser == null) return false;
+    public void logout() {
+        if (activeUser == null) return;
         activeUser = null;
-        return true;
     }
 
     // Admin methods (get and set)
