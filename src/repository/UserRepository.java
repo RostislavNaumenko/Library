@@ -9,16 +9,23 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class UserRepository {
 
-    private final MyList<User> users;
+    private final MyList<User> users = new MagicList<>();
     private final AtomicInteger currentId = new AtomicInteger(1);
     private User activeUser;
 
 
     public UserRepository() {
-        this.users = new MagicList<>();
+    }
+
+    {
+        users.add(new User(1, "Rostyslav", "ros@gmail.com", "Hjcnbc@322"));
+        users.add(new User(2, "Stas", "stas@gmail.com", "Hjcnbc@32222"));
+        users.add(new User(3, "Vlad", "vlad@gmail.com", "Vlad@32222"));
+
     }
 
     public User addUser(String name, String email,String password){
+
         User user = new User(currentId.getAndIncrement(), name, email, password);
         users.add(user);
 
@@ -64,6 +71,7 @@ public class UserRepository {
         return false;
     }
 
+
     //Set
     public User setUserRole(int id, Role role){
        User user = getUserById(id);
@@ -72,6 +80,7 @@ public class UserRepository {
 
        return user;
     }
+
 
 
 }

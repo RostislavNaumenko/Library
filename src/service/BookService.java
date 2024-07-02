@@ -15,7 +15,7 @@ public class BookService {
     //Add books
 
     public Book addBook(String title, String author){
-        //TODO(Rostyslav) Проверить если существует эта книга в нашем списке ( с таким именем и автором)
+        if(!isTitleValid(title) || !isAuthorValid(author)) return null;
         Book book = bookRepository.addBook(title, author);
 
         return book;
@@ -39,7 +39,7 @@ public class BookService {
         return bookRepository.getBooksByAuthor(author);
     }
 
-    public Book getBookByAuthorAndTitle(String title, String author){
+    public Book getBookByTitleAndAuthor(String title, String author){
         return bookRepository.getBookByAuthorAndTitle(title, author);
     }
 
@@ -57,7 +57,7 @@ public class BookService {
 
     //Взятие книги по title и author
     public boolean takeBook (String title, String author){
-        Book book = getBookByAuthorAndTitle(title, author);
+        Book book = getBookByTitleAndAuthor(title, author);
         return bookRepository.takeBook(book.getBookId());
     }
 
@@ -70,7 +70,7 @@ public class BookService {
 
     //Возвращение книги по title и id
     public boolean returnBook (String title, String author){
-        Book book = getBookByAuthorAndTitle(title, author);
+        Book book = getBookByTitleAndAuthor(title, author);
         return bookRepository.returnBook(book.getBookId());
 
     }
@@ -83,6 +83,12 @@ public class BookService {
         return bookRepository.removeBook(bookId);
     }
 
+    public Book removeBook(String title, String author){
+        Book book = getBookByTitleAndAuthor(title, author);
+        if(book == null) return null;
+        return bookRepository.removeBook(book.getBookId());
+    }
+
     //Sort
 
     //Сортировка книг по автору
@@ -93,6 +99,43 @@ public class BookService {
     public MyList<Book> sortAllBooksByTitle(){
         return bookRepository.sortAllBooksByTitle();
     }
+
+
+    private boolean isTitleValid(String title){
+        if (title == null || title.length() < 1 || title.length() > 100) return false;
+
+        boolean validCharacters = true;
+        boolean noLeadingOrTrailingSpaces = title.charAt(0) != ' ' && title.charAt(title.length() - 1) != ' ';
+        boolean noConsecutiveSpaces = !title.contains("  ");
+
+        for (char ch : title.toCharArray()) {
+            if (!Character.isLetterOrDigit(ch) && ch != '\'' && ch != '-' && ch != ',' && ch != ' ' && ch!= '+') {
+                validCharacters = false;
+                break;
+            }
+        }
+
+        return validCharacters && noLeadingOrTrailingSpaces && noConsecutiveSpaces;
+    }
+
+    private boolean isAuthorValid(String author){
+        if (author == null || author.length() < 1 || author.length() > 50) return false;
+
+        boolean validCharacters = true;
+        boolean noLeadingOrTrailingSpaces = author.charAt(0) != ' ' && author.charAt(author.length() - 1) != ' ';
+        boolean noConsecutiveSpaces = !author.contains("  ");
+        boolean firstCharacterUpperCase = Character.isUpperCase(author.charAt(0));
+
+        for (char ch : author.toCharArray()) {
+            if (!Character.isLetter(ch) && ch != '\'' && ch != '-' && ch != ',' && ch != ' ') {
+                validCharacters = false;
+                break;
+            }
+        }
+
+        return validCharacters && noLeadingOrTrailingSpaces && noConsecutiveSpaces && firstCharacterUpperCase;
+    }
+
 
 
 

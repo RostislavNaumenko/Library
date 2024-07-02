@@ -12,20 +12,34 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class BookRepository {
 
-    private final MyList<Book> books;
-    private final AtomicInteger currentId = new AtomicInteger(1);
+    private final MyList<Book> books = new MagicList<>();
+    private final AtomicInteger currentId = new AtomicInteger(5);
+
 
     public BookRepository() {
-        this.books = new MagicList<>();
+
     }
 
+    {
+        books.add(new Book(1,"Java for beginners","Stefan"));
+        books.add(new Book(2,"The Great Gatsby", "F. Scott Fitzgerald"));
+        books.add(new Book(3,"1984", "George Orwell"));
+        books.add(new Book(4,"To Kill a Mockingbird", "Harper Lee"));
+
+    }
 
     //Add book
     public Book addBook (String title, String author){
+        for(Book book : books){
+            if(book.getTitle().equalsIgnoreCase(title) && book.getAuthor().equalsIgnoreCase(author)){
+                return null;
+            }
+        }
         Book book = new Book(currentId.getAndIncrement(), title, author);
         books.add(book);
         return book;
     }
+
 
     //Read
     public MyList<Book> getAllBooks() {
@@ -128,9 +142,9 @@ public class BookRepository {
     public Book removeBook(int bookId){
         Book book = getBookById(bookId);
         if(book == null) return null;
-
         books.remove(book);
         return book;
+
     }
 
     //Sort
@@ -152,11 +166,11 @@ public class BookRepository {
 
     public MyList<Book> sortAllBooksByTitle(){
 
-        MyList<Book> sortedBooks = new MagicList<>();
-        for(Book book : books){
-            sortedBooks.add(book);
-        }
-        return (MyList<Book>) Comparator.comparing(Book::getTitle);
+        Book[] array = books.toArray();
+
+        Arrays.sort(array, Comparator.comparing(Book::getTitle));
+        MyList<Book> result = new MagicList<>(array);
+        return result;
     }
 
 }

@@ -20,12 +20,9 @@ public class UserService {
 
     //Добавление пользователя
     public User registerUser(String name, String email, String password) {
-        //TODO (Rostyslav) Добавить валидация email, password, name
-        // name:
-        // 1.должно начинаться с большой буквы
-        // 2.не должно иметь цифр и специальных знаков
-
-        if (userRepository.isEmailExists(email)) return null;
+        if ( !isNameValid(name) || !isEmailValid(email) || userRepository.isEmailExists(email) || isPasswordValid(password) ){
+            return null;
+        }
         User user = userRepository.addUser(name, email, password);
         return user;
     }
@@ -79,6 +76,95 @@ public class UserService {
         return userRepository.setUserRole(id, role);
     }
 
+    //Валидация email
+    private boolean isEmailValid(String email) {
+
+        // 1. должна присутствовать @ и только одна
+        int indexAt = email.indexOf('@');
+        if (indexAt == -1 || indexAt != email.lastIndexOf('@')) return false;
+
+        // 2. Точка после собаки
+        if (email.indexOf('.', indexAt) == -1) return false;
+
+        //3. после последней точки 2 или более символов
+        if (email.lastIndexOf('.') >= email.length() - 2) return false;
+
+        //4. английский алфавит, цифры, '_', '-', '.', '@'
+
+        for (int i = 0; i < email.length(); i++) {
+            char ch = email.charAt(i);
+
+            if (!(Character.isAlphabetic(ch)
+                    || Character.isDigit(ch)
+                    || ch == '_'
+                    || ch == '-'
+                    || ch == '.'
+                    || ch == '@')) {
+                return false;
+            }
+        }
+
+        // 5. до собаки должен быть мин 1 символ
+        // ???
+        if (indexAt == 0) return false;
+
+        if (!Character.isAlphabetic(email.charAt(0)))  return false;
+
+        return true;
+    }
+
+    private boolean isPasswordValid(String password) {
+        if (password == null || password.length() < 8) return false;
+
+        boolean isDigit = false;
+        boolean isLowerCase = false;
+        boolean isUpperCase = false;
+        boolean isSpecialSymbol = false;
+
+        for (char ch : password.toCharArray()) {
+            if (Character.isDigit(ch)) {
+                isDigit = true;
+            }
+            if (Character.isLowerCase(ch)) {
+                isLowerCase = true;
+            }
+            if (Character.isUpperCase(ch)) {
+                isUpperCase = true;
+            }
+            if ("!%$@&*()[]".indexOf(ch) >= 0) {
+                isSpecialSymbol = true;
+            }
+        }
+        return  isDigit && isLowerCase && isUpperCase && isSpecialSymbol;
+
+    }
+
+    private boolean isNameValid(String name) {
+        if(name == null || name.length() < 3 || name.length() > 50) return false;
+
+        boolean isFirstLetterUpperCase = Character.isUpperCase(name.charAt(0));
+        boolean noDigit = true;
+        boolean noSpecialSymbol = true;
+        boolean validCharacters = true;
+
+        for (char ch : name.toCharArray()) {
+            if (Character.isDigit(ch)) {
+                noDigit = false;
+            }
+            if ("!%$@&*()[]".indexOf(ch) >= 0) {
+                noSpecialSymbol = false;
+            }
+            if (!Character.isLetter(ch) && ch != ' ') {
+                validCharacters = false;
+            }
+
+        }
+
+        boolean noLeadingOrTrailingSpaces = name.charAt(0) != ' ' && name.charAt(name.length() - 1) != ' ';
+        boolean noConsecutiveSpaces = !name.contains("  ");
+        return isFirstLetterUpperCase && noDigit && noSpecialSymbol && validCharacters && noLeadingOrTrailingSpaces && noConsecutiveSpaces;
+
+    }
 
 
 }
