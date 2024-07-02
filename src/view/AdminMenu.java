@@ -32,6 +32,7 @@ public class AdminMenu {
             System.out.println("\nСделайте выбор пункта:");
             int control = scanner.nextInt();
             scanner.nextLine();
+
             if (control == 0)
                 break;
             switch (control){
@@ -51,7 +52,6 @@ public class AdminMenu {
                     waitRead();
                     break;
                 default:
-                    System.out.println(control);
                     System.out.println("не корректный выбор\n");
 
             }
@@ -62,6 +62,8 @@ public class AdminMenu {
 
     private void AdminMenuWithBooks(int control) {
         switch (control) {
+            case 0:
+                break;
             case 1:
                 // Добавление книги
                 System.out.println("\nДОБАВЛЕНИЕ КНИГИ");
@@ -89,15 +91,13 @@ public class AdminMenu {
                     int controlDelete = scanner.nextInt();
                     scanner.nextLine();
                     if (controlDelete == 0) break;
-
                     AdminMenuWithDeletingBooks(controlDelete);
-                }
+                  }
             default:
                 System.out.println("не корректный выбор\n");
         }
     }
-
-    private void AdminMenuWithDeletingBooks(int controlDelete) {
+  private void AdminMenuWithDeletingBooks(int controlDelete) {
         showBooks();
         switch (controlDelete) {
             case 1:

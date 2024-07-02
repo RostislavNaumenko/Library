@@ -13,10 +13,12 @@ public class UserRepository {
     private final AtomicInteger currentId = new AtomicInteger(6);
 
 
+
     public UserRepository() {
     }
 
     {
+
         users.add(new User(1, "Rostyslav", "ros@gmail.com", "Hjcnb@322", Role.ADMIN));
         users.add(new User(2, "Stas", "stas@gmail.com", "Hjcnbc@32222"));
         users.add(new User(3, "Vlad", "vlad@gmail.com", "Vlad@1234"));

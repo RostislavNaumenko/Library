@@ -21,7 +21,6 @@ public class UserService {
         if ( !isNameValid(name) || !isEmailValid(email) || userRepository.isEmailExists(email) || !isPasswordValid(password) ){
             return null;
         }
-
         User user = userRepository.addUser(name, email, password);
         activeUser = user;
         return user;
