@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class UserRepository {
 
     private final MyList<User> users = new MagicList<>();
-    private final AtomicInteger currentId = new AtomicInteger(1);
+    private final AtomicInteger currentId = new AtomicInteger(4);
     private User activeUser;
 
 
