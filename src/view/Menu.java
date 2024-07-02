@@ -19,11 +19,11 @@ public class Menu {
     private final Scanner scanner = new Scanner(System.in);
 
     public Menu() {
-        this.bookService = new BookService(new BookRepository());
-        this.userService = new UserService(new UserRepository());
+        this.bookService = new BookService();
+        this.userService = new UserService();
         this.bookMenu = new BookMenu();
         this.userMenu = new UserMenu();
-        this.adminMenu = new AdminMenu();
+        this.adminMenu = new AdminMenu(bookService, userService);
     }
 
 
