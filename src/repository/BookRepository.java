@@ -91,6 +91,15 @@ public class BookRepository {
     }
 
 
+    public MyList<Book> getFreeBooks() {
+        MyList<Book> freeBooks = new MagicList<>();
+        for (Book book : books) {
+            if (book.isTaken() == false) {
+                freeBooks.add(book);
+            }
+        }
+        return freeBooks;
+    }
 
     public Book getBookByAuthorAndTitle(String title, String author){
 
