@@ -158,7 +158,9 @@ public class BookRepository {
             }
         }
         if(authorBooks == null) return null;
-        MyList<Book> sortedAuthorBooks = (MyList<Book>) Comparator.comparing(Book :: getTitle);
+        Book[] booksAuthor = authorBooks.toArray();
+        Arrays.sort(booksAuthor, Comparator.comparing(Book :: getTitle));
+        MyList<Book> sortedAuthorBooks = new MagicList<>(booksAuthor);
 
         return sortedAuthorBooks;
 
