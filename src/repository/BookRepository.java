@@ -158,7 +158,7 @@ public class BookRepository {
                 authorBooks.add(book);
             }
         }
-
+        if(authorBooks == null) return null;
         MyList<Book> sortedAuthorBooks = (MyList<Book>) Comparator.comparing(Book :: getTitle);
 
         return sortedAuthorBooks;
