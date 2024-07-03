@@ -80,16 +80,6 @@ public class BookRepository {
         return authorBooks;
     }
 
-    public MyList<Book> getFreeBooks() {
-        MyList<Book> freeBooks = new MagicList<>();
-        for (Book book : books) {
-            if (!book.isTaken()) {
-                freeBooks.add(book);
-            }
-        }
-        return freeBooks;
-    }
-
 
     public MyList<Book> getFreeBooks() {
         MyList<Book> freeBooks = new MagicList<>();
